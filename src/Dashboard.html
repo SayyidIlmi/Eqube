@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/style/Font.js"></script>
+</head>
+
+<body>
+    <div class="flex h-screen ">
+        <!-- SideBar -->
+        <div id="sidebar"></div>
+        <!-- Main Content -->
+        <main class="flex-1 p-6 overflow-y-auto z-1">
+            <!-- Your main content goes here -->
+            <div class="fixed right-0 mt-6 mr-16">
+                <div class="space-x-6">
+                    <a href="Dashboard.html" class="text-orange-500 text-xl font-bold underline">Beranda</a>
+                    <a href="Progress.html" class="text-orange-500 text-xl font-medium hover:underline">Progress</a>
+                    <a href="Profil.html" class="text-orange-500 text-xl font-medium hover:underline">Profil</a>
+                </div>
+            </div>
+
+            <!-- Grid 2 kolom x 4 baris -->
+            <div class="grid grid-cols-2 gap-6 mt-20">
+                <!-- Kata Motivasi + Profil -->
+                <div class="p-6 flex flex-col space-y-4 col-start-1">
+  <div class="flex items-center space-x-4">
+    <div class="bg-gray-300 w-30 h-30 rounded-md flex items-center justify-center text-gray-500 text-5xl">
+      👤
+    </div>
+    <div>
+      <p class="text-gray-500 text-sm">Kata Motivasi</p>
+      <p class="text-gray-700 italic">
+        "Tetap semangat dan jangan menyerah untuk masa depan yang lebih cerah."
+      </p>
+    </div>
+  </div>
+  <p class="font-semibold">Welcome Quber, <span class="font-bold">Nama Siswa</span></p>
+</div>
+                <!-- Kuis Hari Ini -->
+
+                <div class="bg-blue-50 p-6 rounded-lg col-start-1">
+                    <h3 class="font-bold text-lg mb-2">Kuis Hari Ini</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                </div>
+
+                <!-- Belajar Hari Ini -->
+                <div class="bg-blue-50 p-6 rounded-lg col-start-1">
+                    <h3 class="font-bold text-lg mb-2">Belajar Hari Ini</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor exercitation
+                        ullamco laboris nisi ut aliquip.</p>
+                </div>
+
+                <!-- Video Ringkas -->
+                <div class="bg-blue-50 p-6 rounded-lg col-start-1">
+                    <h3 class="font-bold text-lg mb-2">Video Ringkas</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                </div>
+
+                <!-- Pengumuman -->
+                <div class="bg-blue-50 p-6 rounded-lg col-start-2 row-start-1 row-span 3">
+                    <h3 class="font-bold text-lg mb-2">Pengumuman</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                </div>
+
+                <!-- Statistik Nilai -->
+                <div class="bg-blue-50 p-6 rounded-lg col-start-2 row-start-2 row-end-5">
+                    <h3 class="font-bold text-lg mb-4">Statistik Nilai</h3>
+                    <div class="flex justify-between items-center mb-4">
+                        <select id="subjectSelector" class="p-2 border rounded">
+                            <option value="Matematika">Matematika</option>
+                            <option value="IPA">IPA</option>
+                        </select>
+                    </div>
+                    <canvas id="chart" height="150"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Background Logo -->
+        <div class="absolute right-0 top-0 z-0">
+            <img src="/image/Bg_Logo.svg" alt="" class="w-64 h-64" />
+        </div>
+    </div>
+
+    <!-- Sidebar Inject -->
+    <script>
+        fetch('/Component/SidebarDashboard.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('chart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Tes 1', 'Tes 2', 'Tes 3', 'Tes 4', 'Tes 5'],
+                datasets: [{
+                    label: 'Matematika',
+                    data: [75, 80, 70, 90, 85],
+                    borderColor: 'blue',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        document.getElementById('subjectSelector').addEventListener('change', function () {
+            const subject = this.value;
+            if (subject === 'Matematika') {
+                chart.data.datasets[0].label = 'Matematika';
+                chart.data.datasets[0].data = [75, 80, 70, 90, 85];
+                chart.data.datasets[0].borderColor = 'blue';
+            } else {
+                chart.data.datasets[0].label = 'IPA';
+                chart.data.datasets[0].data = [65, 78, 88, 70, 95];
+                chart.data.datasets[0].borderColor = 'orange';
+            }
+            chart.update();
+        });
+    </script>

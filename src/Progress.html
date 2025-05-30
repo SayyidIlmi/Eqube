@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eQube - Progress</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-8 py-4 shadow">
+    <div class="flex items-center space-x-2">
+      <div class="bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-xl">e</div>
+      <h1 class="text-orange-600 font-bold text-2xl">eQube</h1>
+    </div>
+    <nav class="flex space-x-8 text-orange-500 font-medium">
+      <a href="Dashboard.html">Beranda</a>
+      <a href="#" class="font-bold border-b-2 border-orange-500">Progress</a>
+      <a href="Profil.html">Profil</a>
+    </nav>
+  </header>
+  <div class="text-xs text-orange-500 px-8 mt-1">Smart LMS Created By Kelompok 2</div>
+
+  <!-- Main Section -->
+  <main class="p-8 grid lg:grid-cols-3 gap-6">
+    <!-- Progress Circles -->
+    <div class="col-span-2 bg-blue-50 p-6 rounded-xl flex justify-around items-center">
+      <div class="flex flex-col items-center">
+        <canvas id="matematikaProgress" width="180"></canvas>
+        <p class="mt-2 font-bold">Matematika</p>
+      </div>
+      <div class="flex flex-col items-center">
+        <canvas id="ipaProgress" width="180"></canvas>
+        <p class="mt-2 font-bold">IPA</p>
+      </div>
+      <div class="flex flex-col items-center">
+        <canvas id="bindoProgress" width="180"></canvas>
+        <p class="mt-2 font-bold">B.Indonesia</p>
+      </div>
+    </div>
+
+    <!-- Statistik Nilai -->
+    <div class="bg-blue-50 p-6 rounded-xl">
+      <h2 class="font-bold text-lg mb-4">Statistik Nilai</h2>
+      <div class="flex space-x-2 mb-4">
+        <span class="bg-blue-700 text-white text-sm px-3 py-1 rounded-full">Matematika ✕</span>
+        <span class="bg-orange-500 text-white text-sm px-3 py-1 rounded-full">IPA ✕</span>
+      </div>
+      <canvas id="nilaiChart" height="200"></canvas>
+    </div>
+
+    <!-- Quiz List -->
+    <div class="col-span-3 mt-6">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="text-sm text-gray-600 border-b border-gray-300">
+            <th class="pb-2">Quiz Quber</th>
+            <th class="pb-2">Release Date</th>
+            <th class="pb-2">Status</th>
+            <th class="pb-2">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-200">
+            <td class="py-4 flex items-start space-x-3">
+              <div class="bg-gray-200 p-2 rounded-md">
+                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-bold">Tugas Aljabar 1</p>
+                <p class="text-sm text-gray-500">Aljabar Merupakan Cabang Matematika Yang Menggunakan Simbol ..... </p>
+              </div>
+            </td>
+            <td class="py-4">12/05/2025</td>
+            <td class="py-4 text-gray-600">Assigned</td>
+            <td class="py-4">0/100</td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-4 flex items-start space-x-3">
+              <div class="bg-orange-500 p-2 rounded-md">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-bold">Tugas Aljabar 2</p>
+                <p class="text-sm text-gray-500">Geometri Mempelajari Sifat-Sifat Dan Hubungan Antar Titik, Garis, Bidang.....</p>
+              </div>
+            </td>
+            <td class="py-4">12/05/2025</td>
+            <td class="py-4 text-orange-600 font-bold">Finish</td>
+            <td class="py-4">58/100</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    // Donut Charts
+const centerTextPlugin = {
+      id: 'centerText',
+      afterDraw(chart) {
+        const ctx = chart.ctx;
+        const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
+        const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+
+        ctx.save();
+        ctx.font = 'bold 32px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = chart.config.options.plugins.centerText.color || '#F97316';
+        ctx.fillText(chart.config.options.plugins.centerText.text, centerX, centerY);
+        ctx.restore();
+      }
+    };
+
+    // Daftarkan plugin
+    Chart.register(centerTextPlugin);
+
+    // Fungsi untuk membuat donut chart
+    const donutChart = (id, value, color) => {
+      new Chart(document.getElementById(id), {
+        type: 'doughnut',
+        data: {
+          datasets: [{
+            data: [value, 100 - value],
+            backgroundColor: [color, 'white'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          cutout: '80%', // Lubang besar untuk efek donut
+          plugins: {
+            legend: { display: false },
+            centerText: {
+              text: value + '%', // Teks dinamis berdasarkan value
+              color: color // Warna teks sama dengan donut
+            }
+          }
+        }
+      });
+    };
+
+    donutChart('matematikaProgress', 50, '#F97316');
+    donutChart('ipaProgress', 70, '#F97316');
+    donutChart('bindoProgress', 35, '#F97316');
+
+    // Line Chart
+    const ctx = document.getElementById('nilaiChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Tes 1', 'Tes 2', 'Tes 3', 'Tes 4', 'Tes 5', 'Tes 6'],
+        datasets: [
+          {
+            label: 'Matematika',
+            data: [40, 60, 30, 70, 50, 75],
+            borderColor: '#1D4ED8',
+            backgroundColor: 'transparent',
+            tension: 0.4
+          },
+          {
+            label: 'IPA',
+            data: [80, 60, 75, 85, 40, 25],
+            borderColor: '#F97316',
+            backgroundColor: 'transparent',
+            tension: 0.4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, max: 100 },
+        }
+      }
+    });
+  </script>
+</body>
+</html>
