@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eQube - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff8c42 100%);
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .input-focus:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+        .btn-hover:hover {
+            background: linear-gradient(135deg, #e55a2b 0%, #e6841a 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+        .illustration-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg flex items-center justify-center p-4">
+    <div class="w-full max-w-6xl mx-auto">
+        <div class="glass-effect rounded-3xl shadow-2xl overflow-hidden">
+            <div class="flex flex-col lg:flex-row min-h-[600px]">
+                
+                <!-- Left Panel - Illustration -->
+                <div class="lg:w-1/2 bg-white p-8 lg:p-12 flex flex-col items-center justify-center relative">
+                    <!-- Logo -->
+                    <div class="absolute top-8 left-8">
+                        <div class="inline-flex items-center">
+                            <div class="w-10.65 h-10.27"><img src="Layer_x0020_1.svg" alt=""></div>
+                        </div>
+                    </div>
+
+                    <!-- Illustration -->
+                    <div class="illustration-float max-w-md w-full">
+                        <!-- Main illustration container -->
+                        <div class="relative">
+                            <!-- Background browser window -->
+                            <div class="bg-blue-100 rounded-lg p-4 mb-4 relative">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                                </div>
+                                
+                                <!-- Person with laptop -->
+                                <div class="flex items-center justify-center">
+                                    <div class="relative">
+                                        <!-- Person -->
+                                        <div class="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full relative mb-4">
+                                            <div class="absolute top-4 left-6 w-3 h-3 bg-white rounded-full"></div>
+                                            <div class="absolute top-4 right-6 w-3 h-3 bg-white rounded-full"></div>
+                                            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-6 h-2 bg-white rounded-full"></div>
+                                        </div>
+                                        
+                                        <!-- Laptop -->
+                                        <div class="w-20 h-12 bg-gray-700 rounded-lg relative mx-auto">
+                                            <div class="w-16 h-10 bg-blue-200 rounded mt-1 mx-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating elements -->
+                            <div class="absolute -top-4 -right-4 w-12 h-12 bg-orange-400 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+
+                            <div class="absolute -bottom-2 -left-4 w-8 h-8 bg-green-400 rounded-full"></div>
+                            
+                            <div class="absolute top-1/2 -right-6 w-6 h-6 bg-yellow-400 rounded-full"></div>
+
+                            <!-- Video call window -->
+                            <div class="absolute top-0 right-0 w-20 h-16 bg-white rounded-lg shadow-lg border-2 border-gray-200 p-2">
+                                <div class="w-12 h-8 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full mx-auto mb-1">
+                                    <div class="absolute top-1 left-1 w-2 h-2 bg-white rounded-full"></div>
+                                    <div class="absolute top-1 right-1 w-2 h-2 bg-white rounded-full"></div>
+                                </div>
+                                <div class="w-full h-2 bg-gray-200 rounded"></div>
+                            </div>
+
+                            <!-- Document/Chat elements -->
+                            <div class="absolute bottom-0 left-0 w-16 h-12 bg-orange-100 rounded-lg p-2">
+                                <div class="space-y-1">
+                                    <div class="w-full h-1 bg-orange-300 rounded"></div>
+                                    <div class="w-3/4 h-1 bg-orange-300 rounded"></div>
+                                    <div class="w-full h-1 bg-orange-300 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Registration Form -->
+                <div class="lg:w-1/2 bg-white p-8 lg:p-12 flex flex-col justify-center">
+                    <div class="max-w-md mx-auto w-full">
+                        <!-- Form Header -->
+                        <div class="text-center mb-8">
+                            <h2 class="text-3xl font-bold text-orange-500 mb-2">Sign Up</h2>
+                        </div>
+
+                        <!-- Registration Form -->
+                        <form class="space-y-6" onsubmit="handleRegister(event)">
+                            <!-- Name Fields Row -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label for="firstName" class="text-gray-600 text-sm font-medium">First Name</label>
+                                    <input 
+                                        type="text" 
+                                        id="firstName" 
+                                        name="firstName"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all duration-300 text-gray-700"
+                                        required
+                                    >
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="lastName" class="text-gray-600 text-sm font-medium">Last Name</label>
+                                    <input 
+                                        type="text" 
+                                        id="lastName" 
+                                        name="lastName"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all duration-300 text-gray-700"
+                                        required
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- Email Field -->
+                            <div class="space-y-2">
+                                <label for="email" class="text-gray-600 text-sm font-medium">Email</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all duration-300 text-gray-700"
+                                    required
+                                >
+                            </div>
+
+                            <!-- Password Field -->
+                            <div class="space-y-2">
+                                <label for="password" class="text-gray-600 text-sm font-medium">Password</label>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all duration-300 text-gray-700"
+                                    required
+                                >
+                            </div>
+
+                            <!-- Confirm Password Field -->
+                            <div class="space-y-2">
+                                <label for="confirmPassword" class="text-gray-600 text-sm font-medium">Re-Enter Password</label>
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    name="confirmPassword"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all duration-300 text-gray-700"
+                                    required
+                                >
+                            </div>
+
+                            <!-- Terms and Privacy Checkbox -->
+                            <div class="flex items-start space-x-3">
+                                <input 
+                                    type="checkbox" 
+                                    id="terms" 
+                                    name="terms"
+                                    class="mt-1 w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                                    required
+                                >
+                                <label for="terms" class="text-sm text-gray-600">
+                                    I've Read And Agree With 
+                                    <a href="#" class="text-orange-500 hover:text-orange-600 underline">Terms Of Service</a> 
+                                    And Our 
+                                    <a href="#" class="text-orange-500 hover:text-orange-600 underline">Privacy Policy</a>
+                                </label>
+                            </div>
+
+                            <!-- Register Button -->
+                            <div class="pt-4">
+                                <button 
+                                    type="submit"
+                                    class="w-full bg-orange-500 text-white py-3 px-6 rounded-full font-semibold text-lg transition-all duration-300 btn-hover transform"
+                                >
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Sign In Link -->
+                        <div class="mt-6 text-center">
+                            <span class="text-gray-600 text-sm">Already Have Account? </span>
+                            <a href="#" class="text-orange-500 hover:text-orange-600 font-medium text-sm transition-colors duration-300 underline">
+                                Sign In
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Validate password match
+            if (data.password !== data.confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // Add loading state
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.textContent = 'Creating Account...';
+            button.disabled = true;
+            
+            // Simulate registration process
+            setTimeout(() => {
+                alert(`Welcome ${data.firstName}! Registration successful.`);
+                button.textContent = originalText;
+                button.disabled = false;
+                window.location.href = "logineqube.html";
+                // Reset form
+                event.target.reset();
+            }, 2000);
+        }
+
+        // Password strength indicator
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strength = calculatePasswordStrength(password);
+            // You can add visual feedback here
+        });
+
+        function calculatePasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            return score;
+        }
+
+        // Real-time password confirmation
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.style.borderColor = '#ef4444';
+            } else {
+                this.style.borderColor = '#d1d5db';
+            }
+        });
+    </script>
+</body>
+</html>
