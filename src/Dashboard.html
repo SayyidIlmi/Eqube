@@ -92,13 +92,14 @@
     </div>
 
     <!-- Sidebar Inject -->
-    <script>
-        fetch('/Component/SidebarDashboard.html')
+      <script>
+        fetch('/Component/SideBarDashboard.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;
             });
     </script>
+
 
     <!-- Chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
