@@ -21,6 +21,7 @@
 <thead>
 <tr>
     <th>Peserta</th>
+    <th>Kecepatan</th>
     <th style="width:110px">Poin</th>
 </tr>
 </thead>
@@ -46,15 +47,9 @@
 
 <script>
 const data2 = [
-{name:'Karina', pts:1400, avatar:'KA'},
-{name:'Rio', pts:2100, avatar:'R'},
-{name:'Maya', pts:1980, avatar:'M'},
-{name:'Toni', pts:1450, avatar:'T'},
-{name:'Umi', pts:1220, avatar:'U'},
-{name:'Vino', pts:11980, avatar:'V'},
-{name:'Wawan', pts:880, avatar:'W'},
-{name:'Xena', pts:640, avatar:'X'},
-{name:'Yusuf', pts:430, avatar:'Y'}
+{name:'Muhammad', pts:1200, avatar:'M', time:'6'},
+{name:'SUGENG', pts:600, avatar:'S', time:'20'},
+{name:'Sayyid', pts:600, avatar:'S', time:'21'},
 ];
 const tbody2 = document.getElementById('tbody2');
 function render2(filter=''){
@@ -67,7 +62,7 @@ const progressPct = Math.min(100, Math.floor((u.pts % 800)/8)+20);
 tr.innerHTML = `<td><div class='row'><div class='rank ${idx==0?"gold":idx==1?"silver":idx==2?"bronze":""}'>${idx+1}</div>
 <div class='avatar'>${u.avatar}</div>
 <div class='user-info'><div class='username'>${u.name}</div>
-<div class='meta'>Lvl ${Math.min(1+Math.floor(u.pts/300),30)}</div></div></div></td>
+<td><div class='user-info'><div class='username'>${u.time}</div></td>
 <td class='points'>${u.pts}</td>`;
 tbody2.appendChild(tr);
 });
